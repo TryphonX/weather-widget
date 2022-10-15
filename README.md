@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Weather Widget
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a weather widget create with react.js. It specifically shows the weather in Kalamaria, Thessaloniki, Greece. It uses the [OpenWeather API](https://openweathermap.org/api/one-call-api) to include weather forecasts for the next 7 days as well as a max temperature chart.
 
 ## Installation
 
