@@ -15,6 +15,8 @@ const WeatherWidget = () => {
 	const [weatherIcon, setWeatherIcon] = useState();
 	const [weatherIconAltText, setWeatherIconAltText] = useState();
 	const [selectedDay, setSelectedDay] = useState(0);
+	
+	const dayToday = new Date().getDay();
 
 	useEffect(() => {
 		axios.get('https://api.openweathermap.org/data/2.5/onecall?lat=40.58725980318928&lon=22.948223362612612&exclude=hourly,minutely&appid=11b0499bd13ab56063de7565a440eb97&units=metric').then((res) => {
@@ -123,10 +125,10 @@ const WeatherWidget = () => {
 					</Col>
 					{getWeatherInfo()}
 					<Col xs='auto'>
-						<DayPicker selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
+						<DayPicker selectedDay={selectedDay} setSelectedDay={setSelectedDay} dayToday={dayToday} />
 					</Col>
 					<Col xs='auto' xl='5' className='m-0'>
-						<MaxTempChart weatherRes={weatherRes} />
+						<MaxTempChart weatherRes={weatherRes} dayToday={dayToday} />
 					</Col>
 				</Row>
 			</Container>

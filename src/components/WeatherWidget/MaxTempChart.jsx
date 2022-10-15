@@ -2,6 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip } from 'chart.js';
 import PropTypes from 'prop-types';
+import { getFutureDayName } from '../../modules/common';
 
 ChartJS.register(
 	CategoryScale,
@@ -16,12 +17,12 @@ ChartJS.defaults.color = 'white';
 ChartJS.defaults.font.size = 15;
 ChartJS.defaults.font.family = 'Montserrat, sans-serif';
 
-const MaxTempChart = ({weatherRes}) => {
+const MaxTempChart = ({weatherRes, dayToday}) => {
 
 	const maxTemps = weatherRes.daily.map(dailyObj => Math.round(dailyObj.temp.max));
 		
 	const maxTempsData = {
-		labels: ['Today', 'Tomorrow', 'In 2 days', 'In 3 days', 'In 4 days', 'In 5 days', 'In 6 days', 'In 7 days'],
+		labels: ['Today', getFutureDayName(dayToday, 1), getFutureDayName(dayToday, 2), getFutureDayName(dayToday, 3), getFutureDayName(dayToday, 4), getFutureDayName(dayToday, 5), getFutureDayName(dayToday, 6), getFutureDayName(dayToday, 7)],
 		datasets: [
 			{
 				label: 'Max Temperature',
@@ -75,6 +76,7 @@ const MaxTempChart = ({weatherRes}) => {
 
 MaxTempChart.propTypes = {
 	weatherRes: PropTypes.object.isRequired,
+	dayToday: PropTypes.number.isRequired,
 };
 
 export default MaxTempChart;

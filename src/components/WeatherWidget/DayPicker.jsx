@@ -1,8 +1,9 @@
 import React from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { getFutureDayName } from '../../modules/common';
 
-const DayPicker = ({selectedDay, setSelectedDay}) => {
+const DayPicker = ({selectedDay, setSelectedDay, dayToday}) => {
 
 	return (
 		<ToggleButtonGroup vertical size='sm' name='dayBtns' className='rounded semi-dark-bg'
@@ -22,7 +23,7 @@ const DayPicker = ({selectedDay, setSelectedDay}) => {
 				value={1}
 				onClick={() => setSelectedDay(1)}
 			>
-				Tomorrow
+				{getFutureDayName(dayToday, 1)}
 			</ToggleButton>
 			<ToggleButton
 				type='radio'
@@ -30,7 +31,7 @@ const DayPicker = ({selectedDay, setSelectedDay}) => {
 				value={2}
 				onClick={() => setSelectedDay(2)}
 			>
-				In 2 days
+				{getFutureDayName(dayToday, 2)}
 			</ToggleButton>
 			<ToggleButton
 				type='radio'
@@ -38,7 +39,7 @@ const DayPicker = ({selectedDay, setSelectedDay}) => {
 				value={3}
 				onClick={() => setSelectedDay(3)}
 			>
-				In 3 days
+				{getFutureDayName(dayToday, 3)}
 			</ToggleButton>
 			<ToggleButton
 				type='radio'
@@ -46,7 +47,7 @@ const DayPicker = ({selectedDay, setSelectedDay}) => {
 				value={4}
 				onClick={() => setSelectedDay(4)}
 			>
-				In 4 days
+				{getFutureDayName(dayToday, 4)}
 			</ToggleButton>
 			<ToggleButton
 				type='radio'
@@ -54,7 +55,7 @@ const DayPicker = ({selectedDay, setSelectedDay}) => {
 				value={5}
 				onClick={() => setSelectedDay(5)}
 			>
-				In 5 days
+				{getFutureDayName(dayToday, 5)}
 			</ToggleButton>
 			<ToggleButton
 				type='radio'
@@ -62,7 +63,7 @@ const DayPicker = ({selectedDay, setSelectedDay}) => {
 				value={6}
 				onClick={() => setSelectedDay(6)}
 			>
-				In 6 days
+				{getFutureDayName(dayToday, 6)}
 			</ToggleButton>
 			<ToggleButton
 				type='radio'
@@ -70,7 +71,7 @@ const DayPicker = ({selectedDay, setSelectedDay}) => {
 				value={7}
 				onClick={() => setSelectedDay(7)}
 			>
-				In 7 days
+				{getFutureDayName(dayToday, 7)}
 			</ToggleButton>
 		</ToggleButtonGroup>
 	);
@@ -79,6 +80,7 @@ const DayPicker = ({selectedDay, setSelectedDay}) => {
 DayPicker.propTypes = {
 	selectedDay: PropTypes.number.isRequired,
 	setSelectedDay: PropTypes.func.isRequired,
+	dayToday: PropTypes.number.isRequired,
 };
 
 export default DayPicker;
