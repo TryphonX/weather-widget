@@ -63,7 +63,7 @@ const WeatherWidget = () => {
 						<Col className='small'>
 							<Container className='rounded pt-1 pb-1 semi-dark-bg'>
 								<p className='m-0'>
-									Wind speed: {Math.round(msToKmh(weatherRes.current.wind_speed))} km/h 
+									Wind: {Math.round(msToKmh(weatherRes.current.wind_speed))} km/h 
 									
 									<OverlayTrigger overlay={windDegreesOverlay(weatherRes.current.wind_deg)}>
 										<span> <ArrowUp style={{ transform: `rotate(${weatherRes.current.wind_deg}deg)` }} /></span>
@@ -99,7 +99,7 @@ const WeatherWidget = () => {
 						<Col className='small'>
 							<Container className='rounded pt-1 pb-1 semi-dark-bg'>
 								<p className='m-0'>
-									Wind speed: ~{Math.round(msToKmh(dailyWeatherObj.wind_speed))} km/h
+									Wind: ~{Math.round(msToKmh(dailyWeatherObj.wind_speed))} km/h
 									
 									<OverlayTrigger overlay={windDegreesOverlay(dailyWeatherObj.wind_deg)}>
 										<span> <ArrowUp style={{ transform: `rotate(${dailyWeatherObj.wind_deg}deg)` }} /></span>
