@@ -31,6 +31,19 @@ const WeatherWidget = () => {
 		});
 	}, []);
 
+	useEffect(() => {
+		if (weatherRes) {
+			if (selectedDay === 0) {
+				setWeatherIcon(`http://openweathermap.org/img/wn/${weatherRes.current.weather[0]?.icon}@2x.png`);
+				setWeatherIconAltText(weatherRes.current.weather[0].description);
+			}
+			else {
+				console.log(weatherRes);
+				setWeatherIcon(`http://openweathermap.org/img/wn/${weatherRes.daily[selectedDay].weather[0]?.icon}@2x.png`);
+			}
+		}
+	}, [selectedDay]);
+
 	/**
 	 * Converts m/s to km/h.
 	 * @param ms The value in m/s
