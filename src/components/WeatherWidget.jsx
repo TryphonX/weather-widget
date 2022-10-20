@@ -82,15 +82,17 @@ const WeatherWidget = () => {
 
 		return (
 			<Container className='weather-container py-3'>
-				<Row xs='auto'>
+				<Row>
 					<Col xs='auto'>
 						<Image src={weatherIcon} alt={weatherIconAltText} />
 					</Col>
-					{getWeatherInfo()}
+					<Col xs='12' md='7' lg='5' xl='4'>
+						{getWeatherInfo()}
+					</Col>
 					<Col xs='auto'>
 						<DayPicker selectedDay={selectedDay} setSelectedDay={setSelectedDay} dayToday={dayToday} />
 					</Col>
-					<Col xs='auto' xl='5' className='m-0'>
+					<Col xs='auto' lg='12' xl='5' className='m-0'>
 						<MaxTempChart weatherRes={weatherRes} dayToday={dayToday} />
 					</Col>
 				</Row>
