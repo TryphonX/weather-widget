@@ -1,12 +1,11 @@
 import axios from 'axios';
-import React, { Fragment } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Col, Container, Image, OverlayTrigger, Row, Spinner, Tooltip } from 'react-bootstrap';
-import { ArrowUp } from 'react-bootstrap-icons';
+import React, { useState, useEffect } from 'react';
+import { Col, Container, Image, Row, Spinner } from 'react-bootstrap';
 import '../css/weatherWidget.css';
 import DayPicker from './WeatherWidget/DayPicker';
 import MaxTempChart from './WeatherWidget/MaxTempChart';
+import WeatherInfo from './WeatherWidget/WeatherInfo';
+
 
 
 const WeatherWidget = () => {
@@ -43,52 +42,22 @@ const WeatherWidget = () => {
 		}
 	}, [selectedDay]);
 
-	/**
-	 * Converts m/s to km/h.
-	 * @param ms The value in m/s
-	 * @returns kmh value
-	 */
-	const msToKmh = (ms) => ms * 3.6;
 
-
-	if (weatherRes && weatherIcon) {
-
-		const windDegreesOverlay = (degrees) => (
-			<Tooltip>
-				{degrees}°
-			</Tooltip>
-		);
+	if (weatherRes && weatherIconAltText) {
 
 		const getWeatherInfo = () => {
 
 			if (selectedDay === 0) {
-				return (
-					<Fragment>
-						<Col>
-							<h3>Thessaloniki</h3>
-							<p>
-								Temperature: {Math.round(weatherRes.current.temp)}°C
-								<br />
-								<span className='small'>Feels like: {Math.round(weatherRes.current.feels_like)}°C</span>
-							</p>
-						</Col>
-						<Col className='small'>
-							<Container className='rounded pt-1 pb-1 semi-dark-bg'>
-								<p className='m-0'>
-									Wind: {Math.round(msToKmh(weatherRes.current.wind_speed))} km/h 
-									
-									<OverlayTrigger overlay={windDegreesOverlay(weatherRes.current.wind_deg)}>
-										<span> <ArrowUp style={{ transform: `rotate(${weatherRes.current.wind_deg}deg)` }} /></span>
-									</OverlayTrigger>
-									
-									<br />
-									Humidity: {Math.round(weatherRes.current.humidity)}%
-									<br />
-									Pressure: {weatherRes.current.pressure} hPa
-								</p>
-							</Container>
-						</Col>
-					</Fragment>
+
+				return(
+					<WeatherInfo
+						temp={weatherRes.current.temp}
+						feelsLike={weatherRes.current.feels_like}
+						windSpeed={weatherRes.current.wind_speed}
+						windDeg={weatherRes.current.wind_deg}
+						humidity={weatherRes.current.humidity}
+						pressure={weatherRes.current.pressure}
+					/>
 				);
 			}
 
@@ -99,32 +68,14 @@ const WeatherWidget = () => {
 				const avgFeelsLike = (dailyWeatherObj.feels_like.day + dailyWeatherObj.feels_like.night + dailyWeatherObj.feels_like.eve + dailyWeatherObj.feels_like.morn) / 4;
 
 				return (
-					<Fragment>
-						<Col>
-							<h3>Thessaloniki</h3>
-							<p>
-								Temperature: ~{Math.round(avgTemp)}°C
-								<br />
-								<span className='small'>Feels like: ~{Math.round(avgFeelsLike)}°C</span>
-							</p>
-						</Col>
-						<Col className='small'>
-							<Container className='rounded pt-1 pb-1 semi-dark-bg'>
-								<p className='m-0'>
-									Wind: ~{Math.round(msToKmh(dailyWeatherObj.wind_speed))} km/h
-									
-									<OverlayTrigger overlay={windDegreesOverlay(dailyWeatherObj.wind_deg)}>
-										<span> <ArrowUp style={{ transform: `rotate(${dailyWeatherObj.wind_deg}deg)` }} /></span>
-									</OverlayTrigger>
-									
-									<br />
-									Humidity: ~{Math.round(dailyWeatherObj.humidity)}%
-									<br />
-									Pressure: ~{dailyWeatherObj.pressure} hPa
-								</p>
-							</Container>
-						</Col>
-					</Fragment>
+					<WeatherInfo isAvg
+						temp={avgTemp}
+						feelsLike={avgFeelsLike}
+						windSpeed={dailyWeatherObj.wind_speed}
+						windDeg={dailyWeatherObj.wind_deg}
+						humidity={dailyWeatherObj.humidity}
+						pressure={dailyWeatherObj.pressure}
+					/>
 				);
 			}
 		};
