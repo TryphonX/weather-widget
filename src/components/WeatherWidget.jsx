@@ -38,7 +38,6 @@ const WeatherWidget = () => {
 				setWeatherIconAltText(weatherRes.current.weather[0].description);
 			}
 			else {
-				console.log(weatherRes);
 				setWeatherIcon(`http://openweathermap.org/img/wn/${weatherRes.daily[selectedDay].weather[0]?.icon}@2x.png`);
 			}
 		}
@@ -148,7 +147,6 @@ const WeatherWidget = () => {
 		);
 	}
 
-	// add some loading
 	else return (
 		<Container className='weather-container text-center'>
 			<Spinner animation='border' />
